@@ -1,15 +1,82 @@
-//TIP 코드를 <b>실행</b>하려면 <shortcut actionId="Run"/>을(를) 누르거나
-// 에디터 여백에 있는 <icon src="AllIcons.Actions.Execute"/> 아이콘을 클릭하세요.
+import or.controller.MemberController;
+import or.domain.Member;
+import or.repository.MemoryMemberRepository;
+import or.service.MemberServiceImpl;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP 캐럿을 강조 표시된 텍스트에 놓고 <shortcut actionId="ShowIntentionActions"/>을(를) 누르면
-        // IntelliJ IDEA이(가) 수정을 제안하는 것을 확인할 수 있습니다.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP <shortcut actionId="Debug"/>을(를) 눌러 코드 디버그를 시작하세요. 1개의 <icon src="AllIcons.Debugger.Db_set_breakpoint"/> 중단점을 설정해 드렸습니다
-            // 언제든 <shortcut actionId="ToggleLineBreakpoint"/>을(를) 눌러 중단점을 더 추가할 수 있습니다.
-            System.out.println("i = " + i);
+        MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+        MemberServiceImpl memberService = new MemberServiceImpl();
+        MemberController memberController = new MemberController();
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n✨ --- DIVE SOPT 회원 관리 서비스 --- ✨");
+            System.out.println("---------------------------------");
+            System.out.println("1️⃣. 회원 등록 ➕");
+            System.out.println("2️⃣. ID로 회원 조회 🔍");
+            System.out.println("3️⃣. 전체 회원 조회 📋");
+            System.out.println("4️⃣. 종료 🚪");
+            System.out.println("---------------------------------");
+            System.out.print("메뉴를 선택하세요: ");
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    System.out.print("등록할 회원 이름을 입력하세요: ");
+                    String name = scanner.nextLine();
+                    if (name.trim().isEmpty()) {
+                        System.out.println("⚠️ 이름을 입력해주세요.");
+                        continue;
+                    }
+                    Long createdId = memberController.createMember(name);
+                    if (createdId != null) {
+                        System.out.println("✅ 회원 등록 완료 (ID: " + createdId + ")");
+                    } else {
+                        System.out.println("❌ 회원 등록 실패");
+                    }
+                    break;
+                case "2":
+                    System.out.print("조회할 회원 ID를 입력하세요: ");
+                    try {
+                        Long id = Long.parseLong(scanner.nextLine());
+                        Optional<Member> foundMember = memberController.findMemberById(id);
+                        if (foundMember.isPresent()) {
+                            System.out.println("✅ 조회된 회원: ID=" + foundMember.get().getId() + ", 이름=" + foundMember.get().getName());
+                        } else {
+                            System.out.println("⚠️ 해당 ID의 회원을 찾을 수 없습니다.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("❌ 유효하지 않은 ID 형식입니다. 숫자를 입력해주세요.");
+                    }
+                    break;
+                case "3":
+                    List<Member> allMembers = memberController.getAllMembers();
+                    if (allMembers.isEmpty()) {
+                        System.out.println("ℹ️ 등록된 회원이 없습니다.");
+                    }
+                    else {
+                        System.out.println("--- 📋 전체 회원 목록 📋 ---");
+                        for (Member member : allMembers) {
+                            System.out.println("👤 ID=" + member.getId() + ", 이름=" + member.getName());
+                        }
+                        System.out.println("--------------------------");
+                    }
+                    break;
+                case "4":
+                    System.out.println("👋 서비스를 종료합니다. 안녕히 계세요!");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("🚫 잘못된 메뉴 선택입니다. 다시 시도해주세요.");
+            }
         }
     }
 }
