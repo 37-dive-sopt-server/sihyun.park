@@ -10,9 +10,8 @@ public class MemberController {
 
     private MemberServiceImpl memberService = new MemberServiceImpl();
 
-    public Long createMember(String name) {
-
-        return memberService.join(name);
+    public Long createMember(String name, String birth, String email, Member.Gender gender) {
+        return memberService.join(name,birth,email,gender);
     }
 
     public Optional<Member> findMemberById(Long id) {
