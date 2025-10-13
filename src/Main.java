@@ -23,6 +23,7 @@ public class Main {
             System.out.println("2️⃣. ID로 회원 조회 🔍");
             System.out.println("3️⃣. 전체 회원 조회 📋");
             System.out.println("4️⃣. 종료 🚪");
+            System.out.println("5. 회원 탈퇴");
             System.out.println("---------------------------------");
             System.out.print("메뉴를 선택하세요: ");
 
@@ -76,6 +77,22 @@ public class Main {
                     return;
                 default:
                     System.out.println("🚫 잘못된 메뉴 선택입니다. 다시 시도해주세요.");
+                case "5":
+                    System.out.print("삭제할 회원 id를 입력하세요: ");
+                    try {
+                        Long id = Long.parseLong(scanner.nextLine());
+                        Optional<Member> foundMember = memberController.findMemberById(id);
+                        if (foundMember.isPresent()) {
+                            memberController.deleteMember(id);
+                            System.out.println("해당 회원이 삭제되었습니다.");
+                        }
+                        else {
+                            System.out.println("⚠️ 해당 ID의 회원을 찾을 수 없습니다.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("❌ 유효하지 않은 ID 형식입니다. 숫자를 입력해주세요.");
+                    }
+                    break;
             }
         }
     }
