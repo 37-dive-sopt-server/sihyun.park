@@ -55,7 +55,19 @@ public class Main {
                         System.out.println("⚠️ 이름을 입력해주세요.");
                         continue;
                     }
-                    Long createdId = memberController.createMember(name);
+                    if (birth.trim().isEmpty()) {
+                        System.out.println("⚠️ 생년월일을 입력해주세요.");
+                        continue;
+                    }
+                    if (email.trim().isEmpty()) {
+                        System.out.println("⚠️ 이메일을 입력해주세요.");
+                        continue;
+                    }
+                    if (genderInput.trim().isEmpty()) {
+                        System.out.println("⚠️ 성별을 입력해주세요.");
+                        continue;
+                    }
+                    Long createdId = memberController.createMember(name, birth, email, gender);
                     if (createdId != null) {
                         System.out.println("✅ 회원 등록 완료 (ID: " + createdId + ")");
                     } else {
