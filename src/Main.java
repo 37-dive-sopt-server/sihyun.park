@@ -35,6 +35,11 @@ public class Main {
                     String name = scanner.nextLine();
                     System.out.print("등록할 회원의 생년월일을 입력하세요: ");
                     String birth = scanner.nextLine();
+                    int age = memberController.age(birth);
+                    if(age<20){
+                        System.out.println("20세 미만은 회원가입이 불가합니다.");
+                        continue;
+                    }
                     System.out.print("등록할 회원의 이메일을 입력하세요: ");
                     String email = scanner.nextLine();
                     boolean isDuplicate = memberController.validEmail(email);

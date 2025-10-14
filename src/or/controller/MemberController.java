@@ -29,4 +29,8 @@ public class MemberController {
     public boolean validEmail(String email){
         return memberService.validEmail(email);
     }
+
+    public int age(String birth){
+        return memberService.age(birth);
+    }
 }

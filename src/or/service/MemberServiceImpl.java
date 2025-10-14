@@ -2,6 +2,10 @@ package or.service;
 
 import or.domain.Member;
 import or.repository.MemoryMemberRepository;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import java.util.Optional;
@@ -37,5 +41,13 @@ public class MemberServiceImpl {
 
     public List<Member> findAllMembers() {
         return memberRepository.findAll();
+    }
+
+    public int age(String birth) {
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate birthDay = LocalDate.parse(birth, formatter);
+        int age = Period.between(birthDay, now).getYears();
+        return age;
     }
 }
