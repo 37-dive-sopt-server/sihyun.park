@@ -12,8 +12,21 @@ public class MemberServiceImpl {
 
     private static long sequence = 1L;
 
-    public Long join(String name) {
-        Member member = new Member(sequence++, name);
+    public boolean validEmail(String email){
+        List<Member> allMembers = memberRepository.findAll();
+        boolean exists = allMembers
+                .stream()
+                .anyMatch(member -> member.getEmail().equals(email));
+        return exists;
+    }
+
+    public void deleteMember(Long memberId) {
+        memberRepository.deleteById(memberId);
+    }
+
+    public Long join(String name, String birth, String email, Member.Gender gender) {
+        validEmail(email);
+        Member member = new Member(sequence++, name,birth,email,gender);
         memberRepository.save(member);
         return member.getId();
     }

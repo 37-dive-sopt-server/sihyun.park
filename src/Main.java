@@ -33,6 +33,19 @@ public class Main {
                 case "1":
                     System.out.print("등록할 회원 이름을 입력하세요: ");
                     String name = scanner.nextLine();
+                    System.out.print("등록할 회원의 생년월일을 입력하세요: ");
+                    String birth = scanner.nextLine();
+                    System.out.print("등록할 회원의 이메일을 입력하세요: ");
+                    String email = scanner.nextLine();
+                    boolean isDuplicate = memberController.validEmail(email);
+                    if (isDuplicate) {
+                        System.out.println("이미 존재하는 이메일입니다. 다른 이메일로 다시 시도해주세요.");
+                        continue;
+                    }
+                    System.out.print("등록할 회원의 성별을 입력하세요 (MALE/FEMALE): ");
+                    String genderInput = scanner.nextLine();
+                    Member.Gender gender = Member.Gender.valueOf(genderInput.toUpperCase());
+
                     if (name.trim().isEmpty()) {
                         System.out.println("⚠️ 이름을 입력해주세요.");
                         continue;

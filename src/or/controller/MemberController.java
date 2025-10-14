@@ -25,4 +25,8 @@ public class MemberController {
     public void deleteMember(Long memberId) {
         memberService.deleteMember(memberId);
     }
+
+    public boolean validEmail(String email){
+        return memberService.validEmail(email);
+    }
 }
