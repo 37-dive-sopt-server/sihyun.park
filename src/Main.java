@@ -80,8 +80,7 @@ public class Main {
                     List<Member> allMembers = memberController.getAllMembers();
                     if (allMembers.isEmpty()) {
                         System.out.println("ℹ️ 등록된 회원이 없습니다.");
-                    }
-                    else {
+                    } else {
                         System.out.println("--- 📋 전체 회원 목록 📋 ---");
                         for (Member member : allMembers) {
                             System.out.println("👤 ID=" + member.getId() + ", 이름=" + member.getName());
@@ -103,8 +102,7 @@ public class Main {
                         if (foundMember.isPresent()) {
                             memberController.deleteMember(id);
                             System.out.println("해당 회원이 삭제되었습니다.");
-                        }
-                        else {
+                        } else {
                             System.out.println("⚠️ 해당 ID의 회원을 찾을 수 없습니다.");
                         }
                     } catch (NumberFormatException e) {

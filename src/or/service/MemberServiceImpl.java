@@ -16,7 +16,7 @@ public class MemberServiceImpl {
 
     private static long sequence = 1L;
 
-    public boolean validEmail(String email){
+    public boolean validEmail(String email) {
         List<Member> allMembers = memberRepository.findAll();
         boolean exists = allMembers
                 .stream()
@@ -30,7 +30,7 @@ public class MemberServiceImpl {
 
     public Long join(String name, String birth, String email, Member.Gender gender) {
         validEmail(email);
-        Member member = new Member(sequence++, name,birth,email,gender);
+        Member member = new Member(sequence++, name, birth, email, gender);
         memberRepository.save(member);
         return member.getId();
     }
