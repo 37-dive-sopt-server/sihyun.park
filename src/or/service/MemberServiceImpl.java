@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
         return member.getId();
     }
-    
+
     public Optional<Member> findOne(Long memberId) {
         return memberRepository.findById(memberId);
     }
@@ -55,7 +55,7 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findAll();
     }
 
-    public int age(String birth) {
+    public int getAge(String birth) {
         LocalDate now = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate birthDay = LocalDate.parse(birth, formatter);
