@@ -33,12 +33,20 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public Long join(String name, String birth, String email, Member.Gender gender) {
-        validEmail(email);
+        if (validEmail(email)) {
+            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+        }
+
+        int userAge = getAge(birth);
+        if (userAge < 20) {
+            throw new IllegalArgumentException("20세 미만은 회원가입이 불가합니다.");
+        }
+
         Member member = new Member(sequence++, name, birth, email, gender);
         memberRepository.save(member);
         return member.getId();
     }
-
+    
     public Optional<Member> findOne(Long memberId) {
         return memberRepository.findById(memberId);
     }
