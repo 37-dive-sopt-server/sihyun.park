@@ -36,38 +36,12 @@ public class Main {
                     String name = scanner.nextLine();
                     System.out.print("등록할 회원의 생년월일을 입력하세요: ");
                     String birth = scanner.nextLine();
-                    int age = memberController.age(birth);
-                    if(age<20){
-                        System.out.println("20세 미만은 회원가입이 불가합니다.");
-                        continue;
-                    }
                     System.out.print("등록할 회원의 이메일을 입력하세요: ");
                     String email = scanner.nextLine();
-                    boolean isDuplicate = memberController.validEmail(email);
-                    if (isDuplicate) {
-                        System.out.println("이미 존재하는 이메일입니다. 다른 이메일로 다시 시도해주세요.");
-                        continue;
-                    }
                     System.out.print("등록할 회원의 성별을 입력하세요 (MALE/FEMALE): ");
                     String genderInput = scanner.nextLine();
                     Member.Gender gender = Member.Gender.valueOf(genderInput.toUpperCase());
 
-                    if (name.trim().isEmpty()) {
-                        System.out.println("⚠️ 이름을 입력해주세요.");
-                        continue;
-                    }
-                    if (birth.trim().isEmpty()) {
-                        System.out.println("⚠️ 생년월일을 입력해주세요.");
-                        continue;
-                    }
-                    if (email.trim().isEmpty()) {
-                        System.out.println("⚠️ 이메일을 입력해주세요.");
-                        continue;
-                    }
-                    if (genderInput.trim().isEmpty()) {
-                        System.out.println("⚠️ 성별을 입력해주세요.");
-                        continue;
-                    }
                     Long createdId = memberController.createMember(name, birth, email, gender);
                     if (createdId != null) {
                         System.out.println("✅ 회원 등록 완료 (ID: " + createdId + ")");
