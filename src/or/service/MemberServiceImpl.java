@@ -1,5 +1,6 @@
 package or.service;
 
+import or.domain.Gender;
 import or.domain.Member;
 import or.repository.MemoryMemberRepository;
 
@@ -32,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.deleteById(memberId);
     }
 
-    public Long join(String name, String birth, String email, Member.Gender gender) {
+    public Long join(String name, String birth, String email, Gender gender) {
         if(!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")){
             throw new IllegalArgumentException("이메일 형식이 올바르지 않습니다.");
         }

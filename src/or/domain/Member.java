@@ -8,10 +8,6 @@ public class Member {
     private String email;
     private Gender gender;
 
-    public enum Gender {
-        MALE, FEMALE
-    }
-
     public Member(Long id, String name, String birth, String email, Gender gender) {
         this.id = id;
         this.name = name;

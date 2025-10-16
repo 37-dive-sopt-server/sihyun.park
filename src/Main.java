@@ -1,4 +1,5 @@
 import or.controller.MemberController;
+import or.domain.Gender;
 import or.domain.Member;
 import or.repository.MemoryMemberRepository;
 import or.service.MemberService;
@@ -40,9 +41,9 @@ public class Main {
                     String email = scanner.nextLine();
                     System.out.print("등록할 회원의 성별을 입력하세요 (MALE/FEMALE): ");
                     String genderInput = scanner.nextLine();
-                    Member.Gender gender;
+                    Gender gender;
                     try {
-                        gender = Member.Gender.valueOf(genderInput.toUpperCase());
+                        gender = Gender.valueOf(genderInput.toUpperCase());
                     } catch (IllegalArgumentException e) {
                         System.out.println("❌ 잘못된 성별입니다. MALE/FEMALE만 입력해주세요");
                         break;
@@ -61,7 +62,8 @@ public class Main {
                         Long id = Long.parseLong(scanner.nextLine());
                         Optional<Member> foundMember = memberController.findMemberById(id);
                         if (foundMember.isPresent()) {
-                            System.out.println("✅ 조회된 회원: ID=" + foundMember.get().getId() + ", 이름=" + foundMember.get().getName());
+                            System.out.println("✅ 조회된 회원: ID=" + foundMember.get().getId() + ", 이름=" + foundMember.get().getName() + ", 생일=" + foundMember.get().getBirth() +
+                                    ", 이메일= " + foundMember.get().getEmail() + ", 성별= " + foundMember.get().getGender());
                         } else {
                             System.out.println("⚠️ 해당 ID의 회원을 찾을 수 없습니다.");
                         }
@@ -76,7 +78,8 @@ public class Main {
                     } else {
                         System.out.println("--- 📋 전체 회원 목록 📋 ---");
                         for (Member member : allMembers) {
-                            System.out.println("👤 ID=" + member.getId() + ", 이름=" + member.getName());
+                            System.out.println("👤 ID=" + member.getId() + ", 이름=" + member.getName() + ", 생일=" + member.getBirth() +
+                                    ", 이메일= " + member.getEmail() + ", 성별= " + member.getGender());
                         }
                         System.out.println("--------------------------");
                     }

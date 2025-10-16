@@ -1,5 +1,6 @@
 package or.controller;
 
+import or.domain.Gender;
 import or.domain.Member;
 import or.service.MemberService;
 
@@ -12,7 +13,7 @@ public class MemberController {
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
-    public Long createMember(String name, String birth, String email, Member.Gender gender) {
+    public Long createMember(String name, String birth, String email, Gender gender) {
         try {
             if (name == null || name.trim().isEmpty()) {
                 throw new IllegalArgumentException("⚠️ 이름을 입력해주세요.");
