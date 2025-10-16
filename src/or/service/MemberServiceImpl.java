@@ -33,6 +33,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public Long join(String name, String birth, String email, Member.Gender gender) {
+        if(!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")){
+            throw new IllegalArgumentException("이메일 형식이 올바르지 않습니다.");
+        }
+
         if (validEmail(email)) {
             throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
         }
