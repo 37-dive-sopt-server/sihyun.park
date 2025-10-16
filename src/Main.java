@@ -40,7 +40,13 @@ public class Main {
                     String email = scanner.nextLine();
                     System.out.print("등록할 회원의 성별을 입력하세요 (MALE/FEMALE): ");
                     String genderInput = scanner.nextLine();
-                    Member.Gender gender = Member.Gender.valueOf(genderInput.toUpperCase());
+                    Member.Gender gender;
+                    try {
+                        gender = Member.Gender.valueOf(genderInput.toUpperCase());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("❌ 잘못된 성별입니다. MALE/FEMALE만 입력해주세요");
+                        break;
+                    }
 
                     Long createdId = memberController.createMember(name, birth, email, gender);
                     if (createdId != null) {
