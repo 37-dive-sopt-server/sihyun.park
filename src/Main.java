@@ -1,6 +1,7 @@
 import or.controller.MemberController;
 import or.domain.Member;
 import or.repository.MemoryMemberRepository;
+import or.service.MemberService;
 import or.service.MemberServiceImpl;
 
 import java.util.List;
@@ -11,8 +12,8 @@ public class Main {
     public static void main(String[] args) {
 
         MemoryMemberRepository memberRepository = new MemoryMemberRepository();
-        MemberServiceImpl memberService = new MemberServiceImpl();
-        MemberController memberController = new MemberController();
+        MemberService memberService = new MemberServiceImpl(memberRepository);
+        MemberController memberController = new MemberController(memberService);
 
         Scanner scanner = new Scanner(System.in);
 

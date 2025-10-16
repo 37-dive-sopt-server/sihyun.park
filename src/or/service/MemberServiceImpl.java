@@ -10,9 +10,13 @@ import java.util.List;
 
 import java.util.Optional;
 
-public class MemberServiceImpl {
+public class MemberServiceImpl implements MemberService {
 
-    private final MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemoryMemberRepository memberRepository;
+
+    public MemberServiceImpl(MemoryMemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     private static long sequence = 1L;
 
