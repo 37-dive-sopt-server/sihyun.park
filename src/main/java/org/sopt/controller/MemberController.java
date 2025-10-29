@@ -1,18 +1,27 @@
-package or.controller;
+package org.sopt.controller;
 
-import or.domain.Gender;
-import or.domain.Member;
-import or.service.MemberService;
+import org.sopt.domain.Gender;
+import org.sopt.domain.Member;
+import org.sopt.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
 
+@RestController
 public class MemberController {
-    private final MemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
+
+    @PostMapping("/users")
     public Long createMember(String name, String birth, String email, Gender gender) {
         try {
             if (name == null || name.trim().isEmpty()) {
@@ -36,15 +45,17 @@ public class MemberController {
         }
     }
 
-
+    @GetMapping("/users/{id}")
     public Optional<Member> findMemberById(Long id) {
         return memberService.findOne(id);
     }
 
+    @GetMapping("/users/all")
     public List<Member> getAllMembers() {
         return memberService.findAllMembers();
     }
 
+    @DeleteMapping("/users/{id}")
     public void deleteMember(Long memberId) {
         memberService.deleteMember(memberId);
     }

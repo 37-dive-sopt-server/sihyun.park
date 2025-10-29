@@ -1,6 +1,7 @@
-package or.repository;
+package org.sopt.repository;
 
-import or.domain.Member;
+import org.sopt.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,11 +9,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.List;
 
+@Repository
 public class MemoryMemberRepository {
 
-
     private static final Map<Long, Member> store = new HashMap<>();
-
 
     public Member save(Member member) {
         store.put(member.getId(), member);
