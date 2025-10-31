@@ -48,7 +48,7 @@ public class MemberController {
         return GlobalBaseResponse.ok(MemberInfoResponseDto.from(member));
     }
 
-    @GetMapping("/all")
+    @GetMapping("users/all")
     public GlobalBaseResponse<List<MemberInfoResponseDto>> getAllMembers() {
         List<MemberInfoResponseDto> members = memberService.findAllMembers()
                 .stream()
@@ -57,7 +57,7 @@ public class MemberController {
         return GlobalBaseResponse.ok(members);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("users/{id}")
     public GlobalBaseResponse<String> deleteMember(@PathVariable Long id) {
         memberService.deleteMember(id);
         return GlobalBaseResponse.ok(DELETED_MEMBER);
