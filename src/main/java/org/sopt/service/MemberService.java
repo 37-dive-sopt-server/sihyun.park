@@ -1,7 +1,7 @@
-package or.service;
+package org.sopt.service;
 
-import or.domain.Gender;
-import or.domain.Member;
+import org.sopt.domain.Gender;
+import org.sopt.domain.Member;
 
 import java.util.List;
 import java.util.Optional;

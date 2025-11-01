@@ -1,4 +1,4 @@
-package or.domain;
+package org.sopt.domain;
 
 public class Member {
 
