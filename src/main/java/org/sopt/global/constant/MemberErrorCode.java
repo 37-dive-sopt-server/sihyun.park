@@ -1,11 +1,9 @@
 package org.sopt.global.constant;
 
 import org.springframework.http.HttpStatus;
-
 import static org.springframework.http.HttpStatus.*;
 
-public enum MemberErrorCode {
-
+public enum MemberErrorCode implements ErrorCode {
     INVALID_NAME(BAD_REQUEST, "이름을 입력해주세요."),
     UNDER_AGE(BAD_REQUEST, "20세 미만은 가입이 불가합니다."),
     INVALID_EMAIL(BAD_REQUEST, "이메일을 입력해주세요."),
@@ -22,11 +20,9 @@ public enum MemberErrorCode {
         this.message = message;
     }
 
-    public HttpStatus getStatus() {
-        return status;
-    }
+    @Override
+    public HttpStatus getStatus() { return status; }
 
-    public String getMessage() {
-        return message;
-    }
+    @Override
+    public String getMessage() { return message; }
 }
